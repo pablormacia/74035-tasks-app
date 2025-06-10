@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TextInput, Button, FlatList, Modal } from 'react-native';
 import { useState } from 'react';
+import TaskInput from './src/components/TaskInput';
 
 export default function App() {
   const [userInput, setUserInput] = useState("")
@@ -39,17 +40,11 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Text style={{ fontSize: 24 }}>App de tareas</Text>
-      <View style={styles.inputContainer}>
-        <TextInput
-          style={styles.userInput}
-          onChangeText={(text) => setUserInput(text)}
-          value={userInput}
-        />
-        <Button
-          title="+"
-          onPress={handleAddTask}
-        />
-      </View>
+      <TaskInput 
+        userInputDown={userInput}
+        handleAddTaskUp={handleAddTask}
+        setUserInputUp={setUserInput}
+      />
       <View style={styles.tasksContainer}>
         {/*  {
           tasksList.map((task,index)=>(
@@ -85,15 +80,6 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     paddingTop: 50,
   },
-  userInput: {
-    borderBottomColor: "#ccc",
-    borderBottomWidth: 1,
-    width: '70%'
-  },
-  inputContainer: {
-    flexDirection: 'row',
-    gap: 8
-  },
   taskContainer: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -103,6 +89,5 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flexDirection: 'row',
-
   }
 });
